@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: `/personal_page`,
   siteMetadata: {
     title: `Timur Abbiasov`,
     description: `Urban economist and creative coder`,
@@ -27,6 +28,7 @@ module.exports = {
         icon: `src/images/favicon-32x32.png`, // This path is relative to the root of the site.
       },
     },
+    
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

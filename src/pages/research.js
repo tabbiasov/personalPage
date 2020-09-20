@@ -9,6 +9,10 @@ import _ from 'lodash'
 // import { ThemeProvider } from 'emotion-theming'
 // import theme from '../themes/theme.js'
 
+const textSizes = ['15px','15px','16px'];
+const headTextSizes = ['20px','28px', '32px'];
+const smallTextSizes = ['12px','12px', '14px'];
+const titleTextSizes = ['16px','18px', '20px'];
 
 const myResearch = [
   
@@ -38,7 +42,7 @@ function AuthorItems({ authors }) {
         color: 'black',
         fontWeight: 'normal',
         bg:'#E8F6E0',
-        fontSize: '14px',
+        fontSize: smallTextSizes,
         // fontFamily: 'slab',
         display: 'inline-block',
         }}>
@@ -50,11 +54,11 @@ function AuthorItems({ authors }) {
 function PaperTags({ tags }) {
   return _.map(tags, tag =>
     <Box sx={{
-      ml:3, py: '3px', px: '6px',
+      ml:[2,2,3], py: '3px', px: '6px',
       color: 'black',
       fontWeight: 'normal',
       bg: tag.color ? tag.color : 'plainLight',
-      fontSize: '14px',
+      fontSize: smallTextSizes,
       }}>
       <span>{tag.name}</span>
     </Box>
@@ -77,23 +81,23 @@ class ResearchItem extends React.Component {
       // <ThemeProvider theme={theme}>
       <Flex   
         sx={{
-          p: 3,
+          p: [2,2,3],
           pl:0,
           ml:0,
           color: 'black',
-          bg: 'white',
           pt: 1,
           height: 'auto',
-          maxHeight: (this.state.open ? 400 : 200),
+          maxHeight: (this.state.open ? 9999 : 200),
           flexBasis: 160,
           transition: 'max-height 0.7s ease-in-out',
         }}>
         
         <Flex sx={{
             bg:'white',
-            p:3,
-            ml:3,
-            pt:1,
+            p: [2,3,3],
+            ml:[1,1,2],
+            pt: [2,1,1],
+            pb:[1,2,3],
             flexGrow: 1,
             color: 'plainDark',
             flexDirection: 'column',
@@ -107,33 +111,39 @@ class ResearchItem extends React.Component {
           }} onClick={this.toggleOpen}>
           <Box sx={{
              bg:'white',
-             p:1,
+             px:[2,2,2],
+             pb:0,
+             pt:[2,3,"24px"],
+            //  py:[3,5,6],
              fontWeight: 'bold',
-             fontSize: '17px',
+             fontSize: titleTextSizes,
              color: 'black',
              flexGrow: 99,
              transition: 'all 0.3s linear',
           }}>
-           <h3>{this.props.item.title}</h3>
+           {this.props.item.title}
           </Box>
           <Box sx={{
              bg:'white',
-             p:1,
+             p:2,
+             pt: [2,"16px","24px"],
              flexGrow: 99,
             //  display: (this.state.open ? 'inherit' : 'none'),
              opacity: (this.state.open ? 1 : 0),
              maxHeight: (this.state.open ? 400 : 0),
              overflow: 'hidden',
              color: '#223144',
-             fontSize: '16px',
+             fontSize: textSizes,
              transition: 'all 0.7s ease-in-out',
           }}>
-           <p>{this.props.item.abstract}</p>
+           {this.props.item.abstract}
           </Box>
           <Flex sx={{
              p:1,
-             pr:15,
+             pr:[1,10,14],
+             bg: 'white',
              flexGrow: 1,
+             mt: [0,1,1],
              justifyContent: 'flex-end'
           }}>
             <Box sx={{
@@ -145,7 +155,7 @@ class ResearchItem extends React.Component {
               fontWeight: 'normal',
               bg:'white',
               transition: 'all 0.3s linear',
-              fontSize: '14px',
+              fontSize: smallTextSizes,
               }}>
               <span>&lt;Abstract...&gt;</span>
             </Box>
@@ -234,15 +244,17 @@ const ResearchPage = (props) => {
     <Box>
       <span id='research'></span>
       <Box sx={{
-        p:2,
-        pt:3,
+        px:[0,2,2],
+        pt:2,
         mt:3,
-        pb:0,
+        // bg: 'red',
+        pb:2,
         borderTop: '2px solid',
-        borderTopColor: 'black'
+        borderTopColor: 'black',
+        fontSize: ['10px','12px', '15px'],
       }}>
         <h1 >Research</h1>
-        <br/>
+        {/* <br/> */}
         <ResearchItems items={myResearch} />
       </Box>
     </Box>

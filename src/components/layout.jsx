@@ -6,10 +6,16 @@
  */
 
 import React from "react"
+
+import { store } from 'react-notifications-component'
+import ReactNotification from 'react-notifications-component'
+
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css'
+
 import PropTypes from "prop-types"
 import Image from "../components/image"
 import _ from 'lodash'
-import SmoothScroll from 'smooth-scroll'
 import { faEnvelopeOpen, faMobileAlt} from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -37,12 +43,13 @@ import {
 function MenuItems({ sections }) {
   return _.map(sections, item => 
         <Box sx={{
-          p: 3,
-          pt: 1,
+          pl: [1,3,3],
+          ml: [1,0,0],
+          pt: ["2px","3px","6px"],
+          pb: ["1px","2px","4px"],
           mb: 1,
-          pb: 1,
-          color: 'black',
-          // borderRadius: '3px',
+          color: ['#394A56','black','black'],
+          fontSize: ["12px","15px",2],
           ':hover': {
             color: 'oran',
           },
@@ -53,8 +60,7 @@ function MenuItems({ sections }) {
         textDecoration: 'none',
         color: 'inherit',
         }}>
-        <Text fontFamily='heading'
-              fontSize={2}
+        <Text fontFamily='Roboto Condensed, sans-serif'
               color='inherit'
               fontWeight='bold'>
           {item.label}
@@ -64,28 +70,57 @@ function MenuItems({ sections }) {
   );
 }
 
+function copyToClipboard(text) {
+  var dummy = document.createElement("textarea");
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+  store.addNotification({
+    title: text,
+    message: 'Copied to clipboard',
+    type: 'success',                         // 'default', 'success', 'info', 'warning'
+    container: 'bottom-center',                // where to position the notifications
+    animationIn: ["animated", "fadeIn"],     // animate.css classes that's applied
+    animationOut: ["animated", "fadeOut"],   // animate.css classes that's applied
+    dismiss: {
+      duration: 3000
+    }
+  });
+}
+
+function getAlert(text){
+  return () => text? copyToClipboard(text) : null
+}
+
 function ContactItems({ contacts }) {
   return _.map(contacts, item => 
     <Flex sx = {{
       ':hover': {
-        color: 'black',
+        color: 'gree',
       },
-      color: 'plainDark',
-    }}>
+      pr: [3,0,0],
+      // bg: 'red',
+      fontSize: ['12px','10px', '12px'],
+      color: ['gree','plainDark','plainDark'],
+    }} onClick={getAlert(item.copy)}>
       <Box sx={{
           p: 1,
-          pl: 3,
-          width: 170,
-          textAlign: 'left',
+          pl: ['6px',"10px",'10px'],
+          width: [103,170,200],
+          display: ['none','inherit','inherit'],
+          textAlign: ['right','left','left'],
         }}>
-       <a style={{color: 'black', textDecoration: 'none'}} href = {item.href}>{item.link}</a>
+       <a style={{color: 'black', textDecoration: 'none', fontFamily :'Roboto Condensed, sans-serif'}} href = {item.href}>{item.link}</a>
       </Box>
       <Box sx={{
           p: 1,
-          width: 30,
+          // pl: 0,
+          // bg: 'red',
+          width: [20,30,30],
           flexGrow: 0,
-          float: 'center',
-          textAlign: 'center',
+          textAlign: ['center','center','center'],
         }}>
         <a style={{color: 'inherit', textDecoration: 'none'}} href = {item.href}>{item.icon}</a>
       </Box>
@@ -99,12 +134,14 @@ const myContacts = [
   {
     'link': 't.abbiasov@columbia.edu',
     'type': 'email',
+    'copy': 't.abbiasov@columbia.edu',
     'icon': <FontAwesomeIcon icon={faEnvelopeOpen}/>,
-    'href': "mailto: t.abbiasov@columbia.edu"
+    // 'href': "mailto: t.abbiasov@columbia.edu"
   },
   {
     'link': '(646) 940-56-92',
     'type': 'phone',
+    'copy': '(646) 940-56-92',
     'icon': <FontAwesomeIcon icon={faMobileAlt} />
   },
   {
@@ -130,76 +167,98 @@ const Layout = ({ children }) => {
       font-family: 'Source Sans', sans-serif;
       font-size: 15px;
      }
+     html {
+      scroll-behavior: smooth;
+    }
   `
-  if (typeof window !== "undefined") {
-    new SmoothScroll('a[href*="#"]', {
-      speed: 1200,
-      offset: 0
-    });
-  }
 
   return (
     <ThemeProvider theme={theme}>
+      <ReactNotification/>
       <GlobalStyles/>
         <Position 
           position="sticky"
+          zIndex={1}
           top={0}
           left={[0, 0, 0, 0, 0, 'auto']}
           right={['auto', 'auto', 'auto', 'auto', 'auto', 0]}>
           <Flex
-            px={2}
             sx={{
               borderBottom: '2px solid',
-              borderBottomColor: 'gree'
+              borderBottomColor: 'gree',
+              
+              height: ["50px","50px","60px"],
+              fontSize: ["13px",2,2],
+              px:[1,1,2],
             }}
             color='black'
-            height='60px'
             bg='white'
             alignItems='center'>
-            <Text p={2} fontWeight='bold' fontSize='3'><h3 >Timur Abbiasov</h3></Text>
+             <Box sx={{
+               maxWidth: [80,999,999]
+             }}><Text fontWeight='bold'><h3 >Timur Abbiasov</h3></Text></Box>
             <Box mx='auto' />
-            <Link to='#'>
-              .
-            </Link>
+            <Flex sx={{
+                        flexDirection: 'row',
+                        opacity: [1,0,0],
+                        // bg: 'red',
+                        justifyContent: 'space-evenly',
+                        maxWidth: ['90vw', 0, 0],
+                        flexGrow:10,
+                      }}>
+                      <MenuItems sections={pageSections} />
+            </Flex>
           </Flex>
         </Position>
         <Flex
           sx={{
             flexDirection: 'column',
-            minHeight: '90vh'
+            minHeight: '90vh',
           }}>
           <Flex
             sx={{
-              flex: 1
+              flex: 1,
+              // bg: 'red',
             }}>   
             <Box
               sx={{
-                p: 3,
+                py: [0,2,3],
+                pl: [0,'8px','12px'],
+                pr: [0,'4px','4px'],
                 minHeight: 120,
                 flexGrow: 1,
-                flexBasis: 256,
-                mr: 2,
+                // bg: 'red',
+                opacity: [0,1,1],
+                maxWidth: [0, '90vw', '90vw'],
+                flexBasis: [128,200,230],
+                mr: [0,0,0],
               }}>
               <Position 
               position='sticky'
               top = '60px'>
                 <Flex
                   sx={{
-                    p: 3,
+                    pt: [0,0,2],
+                    px: 0,
+                    overflow: 'hide',
                     justifyContent: 'flex-start',
-                    py: '5vh',
                     bg: 'rbg(1,1,1,0)',
-                    width: 256,
                     height: '90vh',
-                    // flexGrow: 1,
+                    flexGrow: 1,
                     flexBasis: 100,
                     flexDirection: 'column'
                   }}>
                   <Box
                   sx={{
-                    p:0,
+                    mt:[0,2,2],
                     bg: 'black',
-                    mb: 2,
+                    mb: [0,2,2],
+                    '@media screen and (max-height: 600px)': {
+                      opacity: 0,
+                      maxWidth: 0
+                    },
+                    // opacity: [0,0,1],
+                    // maxWidth: [0,0,999],
                     }}>
                     <Image/>
                   </Box>
@@ -248,16 +307,34 @@ const Layout = ({ children }) => {
             </Box>
             <Box
               sx={{
-                p: 3,
+                py: [0,1,2],
+                // bg: 'blue',
+                pl: ['0px','2px','8px'],
                 flexGrow: 999999,
-                flexBasis: 0,
+                flexBasis: 200,
                 minWidth: 320,
+                scrollBehavior: 'smooth'
               }}>
+              <Flex sx={{
+                        flexDirection: 'row',
+                        opacity: [1,0,0],
+                        // bg: 'blue',
+                        flexGrow: 1,
+                        pt:1,
+                        maxHeight: ['20vw', 0, 0],
+                        maxWidth: ['100vw', 0, 0],
+                        justifyContent: 'flex-end',
+
+                      }}>
+                      <ContactItems contacts={myContacts} />
+              </Flex>
               <Flex
                 sx={{
                   p: 3,
+                  // bg : 'red',
                   mt:0,
                   flexDirection: 'column',
+                  scrollBehavior: 'smooth'
                 }}>
                 {children}
               </Flex>
