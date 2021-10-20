@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{z3nG:function(e,t,n){"use strict";n.r(t);var a=n("Wbzz"),r=n("q1tI"),i=n.n(r);t.default=function(){var e=Object(a.useStaticQuery)("526309904");return i.a.createElement("head",null,i.a.createElement("meta",{"http-equiv":"refresh",content:"0; URL="+e.file.publicURL}),i.a.createElement("title",null,"The Contribution of Urban Parks to Social Ties between Neighborhoods."))}}}]);
+//# sourceMappingURL=component---src-pages-parks-social-ties-online-js-9e8d6c046426e34b59d1.js.map
