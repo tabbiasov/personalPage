@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{SeI8:function(e,t,n){"use strict";n.r(t);var a=n("Wbzz"),r=n("q1tI"),c=n.n(r);t.default=function(){var e=Object(a.useStaticQuery)("1530340932");return c.a.createElement("head",null,c.a.createElement("meta",{"http-equiv":"refresh",content:"0; URL="+e.file.publicURL}),c.a.createElement("title",null,"Job Market Paper"))}}}]);
+//# sourceMappingURL=component---src-pages-jmp-js-84de680588176db2af39.js.map

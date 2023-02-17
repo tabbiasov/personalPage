@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{"4ngj":function(e,t,n){"use strict";n.r(t);var a=n("Wbzz"),u=n("q1tI"),r=n.n(u);t.default=function(){var e=Object(a.useStaticQuery)("1474128541");return r.a.createElement("head",null,r.a.createElement("meta",{"http-equiv":"refresh",content:"0; URL="+e.file.publicURL}),r.a.createElement("title",null,"Curriculum Vitae"))}}}]);
+//# sourceMappingURL=component---src-pages-cv-js-82104c2310ad59f3874c.js.map
